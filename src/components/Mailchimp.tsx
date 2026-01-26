@@ -3,7 +3,7 @@
 import { mailchimp, newsletter } from "@/resources";
 import { Button, Heading, Input, Text, Background, Column, Row } from "@once-ui-system/core";
 import { opacity, SpacingToken } from "@once-ui-system/core";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function debounce<T extends (...args: any[]) => void>(func: T, delay: number): T {
   let timeout: ReturnType<typeof setTimeout>;
@@ -17,6 +17,7 @@ export const Mailchimp: React.FC<React.ComponentProps<typeof Column>> = ({ ...fl
   const [email, setEmail] = useState<string>("");
   const [error, setError] = useState<string>("");
   const [touched, setTouched] = useState<boolean>(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
 
   const validateEmail = (email: string): boolean => {
     if (email === "") {
@@ -46,6 +47,57 @@ export const Mailchimp: React.FC<React.ComponentProps<typeof Column>> = ({ ...fl
       setError("Please enter a valid email address.");
     }
   };
+
+  useEffect(() => {
+    // Load Mailchimp validation script
+    const existingScript = document.querySelector('script[src*="mc-validate.js"]');
+    if (existingScript) {
+      return; // Script already loaded
+    }
+
+    const script = document.createElement("script");
+    script.src = "//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    // Set up Mailchimp field names (required by validation script)
+    if (typeof window !== "undefined") {
+      (window as any).fnames = new Array();
+      (window as any).ftypes = new Array();
+      (window as any).fnames[0] = "EMAIL";
+      (window as any).ftypes[0] = "email";
+      (window as any).fnames[1] = "FNAME";
+      (window as any).ftypes[1] = "text";
+      (window as any).fnames[2] = "LNAME";
+      (window as any).ftypes[2] = "text";
+    }
+
+    // Monitor for Mailchimp response messages
+    const checkResponses = setInterval(() => {
+      const errorResponse = document.getElementById("mce-error-response");
+      const successResponse = document.getElementById("mce-success-response");
+      
+      if (errorResponse && errorResponse.style.display !== "none" && errorResponse.textContent) {
+        const errorText = errorResponse.textContent.trim();
+        if (errorText) {
+          setError(errorText);
+          setSubmitting(false);
+        }
+      }
+      if (successResponse && successResponse.style.display !== "none" && successResponse.textContent) {
+        const successText = successResponse.textContent.trim();
+        if (successText) {
+          setEmail("");
+          setError("");
+          setSubmitting(false);
+        }
+      }
+    }, 500);
+
+    return () => {
+      clearInterval(checkResponses);
+    };
+  }, []);
 
   if (newsletter.display === false) return null;
 
@@ -122,6 +174,16 @@ export const Mailchimp: React.FC<React.ComponentProps<typeof Column>> = ({ ...fl
         method="post"
         id="mc-embedded-subscribe-form"
         name="mc-embedded-subscribe-form"
+        onSubmit={(e) => {
+          if (!validateEmail(email)) {
+            e.preventDefault();
+            setError("Please enter a valid email address.");
+            return;
+          }
+          setSubmitting(true);
+          setError("");
+          // Form will submit via Mailchimp's AJAX handler
+        }}
       >
         <Row
           id="mc_embed_signup_scroll"
@@ -131,13 +193,15 @@ export const Mailchimp: React.FC<React.ComponentProps<typeof Column>> = ({ ...fl
           gap="8"
         >
           <Input
-            formNoValidate
             id="mce-EMAIL"
             name="EMAIL"
             type="email"
             placeholder="Email"
             required
+            value={email}
             onChange={(e) => {
+              const value = e.target.value;
+              setEmail(value);
               if (error) {
                 handleChange(e);
               } else {
@@ -147,17 +211,7 @@ export const Mailchimp: React.FC<React.ComponentProps<typeof Column>> = ({ ...fl
             onBlur={handleBlur}
             errorMessage={error}
           />
-          <div style={{ display: "none" }}>
-            <input
-              type="checkbox"
-              readOnly
-              name="group[3492][1]"
-              id="mce-group[3492]-3492-0"
-              value=""
-              checked
-            />
-          </div>
-          <div id="mce-responses" className="clearfalse">
+          <div id="mce-responses" className="clear foot">
             <div className="response" id="mce-error-response" style={{ display: "none" }}></div>
             <div className="response" id="mce-success-response" style={{ display: "none" }}></div>
           </div>
@@ -165,15 +219,23 @@ export const Mailchimp: React.FC<React.ComponentProps<typeof Column>> = ({ ...fl
             <input
               type="text"
               readOnly
-              name="b_c1a5a210340eb6c7bff33b2ba_0462d244aa"
+              name="b_eaeb998e18672051e99b8e629_6e06b2b9c7"
               tabIndex={-1}
               value=""
             />
           </div>
           <div className="clear">
             <Row height="48" vertical="center">
-              <Button id="mc-embedded-subscribe" value="Subscribe" size="m" fillWidth>
-                Subscribe
+              <Button 
+                id="mc-embedded-subscribe" 
+                type="submit"
+                value="Subscribe" 
+                size="m" 
+                fillWidth
+                loading={submitting}
+                disabled={submitting || !email || !!error}
+              >
+                {submitting ? "Subscribing..." : "Subscribe"}
               </Button>
             </Row>
           </div>
