@@ -73,7 +73,11 @@ export const Header = () => {
         }}
       >
         <Row paddingLeft="12" fillWidth vertical="center" textVariant="body-default-s">
-          {display.location && <Row s={{ hide: true }}>{person.location}</Row>}
+          {display.location && (
+            <Row s={{ hide: true }} suppressHydrationWarning>
+              {person.locationDisplay || person.location}
+            </Row>
+          )}
         </Row>
         <Row fillWidth horizontal="center">
           <Row

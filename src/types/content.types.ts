@@ -25,6 +25,8 @@ export type Person = {
   email: string;
   /** IANA time zone location */
   location: IANATimeZone;
+  /** Human-readable location for display (e.g., "London, UK") */
+  locationDisplay?: string;
   /** Languages spoken */
   languages?: string[];
 };

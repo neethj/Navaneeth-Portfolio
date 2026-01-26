@@ -11,6 +11,11 @@ import {
   Meta,
   Schema,
   Row,
+  AccordionGroup,
+  Feedback,
+  Card,
+  Grid,
+  SmartLink,
 } from "@once-ui-system/core";
 import { baseURL, about, person, social } from "@/resources";
 import TableOfContents from "@/components/about/TableOfContents";
@@ -30,7 +35,7 @@ export async function generateMetadata() {
 export default function About() {
   const structure = [
     {
-      title: about.intro.title,
+      title: "Introduction",
       display: about.intro.display,
       items: [],
     },
@@ -96,7 +101,7 @@ export default function About() {
             <Avatar src={person.avatar} size="xl" />
             <Row gap="8" vertical="center">
               <Icon onBackground="accent-weak" name="globe" />
-              {person.location}
+              {person.locationDisplay || person.location}
             </Row>
             {person.languages && person.languages.length > 0 && (
               <Row wrap gap="8">
@@ -111,7 +116,6 @@ export default function About() {
         )}
         <Column className={styles.blockAlign} flex={9} maxWidth={40}>
           <Column
-            id={about.intro.title}
             fillWidth
             minHeight="160"
             vertical="center"
@@ -142,16 +146,15 @@ export default function About() {
                 />
               </Row>
             )}
-            <Heading className={styles.textAlign} variant="display-strong-xl">
+            <Heading className={styles.textAlign} variant="display-strong-xl" marginBottom="m">
               {person.name}
             </Heading>
-            <Text
-              className={styles.textAlign}
-              variant="display-default-xs"
-              onBackground="neutral-weak"
-            >
-              {person.role}
-            </Text>
+            <Feedback
+              variant="info"
+              title={person.role}
+              description=""
+              marginBottom="l"
+            />
             {social.length > 0 && (
               <Row
                 className={styles.blockAlign}
@@ -197,144 +200,131 @@ export default function About() {
           </Column>
 
           {about.intro.display && (
-            <Column textVariant="body-default-l" fillWidth gap="m" marginBottom="xl">
-              {about.intro.description}
+            <Column fillWidth gap="m" marginBottom="xl">
+              <Heading as="h2" variant="display-strong-s" marginBottom="m">
+                About Me
+              </Heading>
+              <Text variant="body-default-l" onBackground="neutral-weak" wrap="balance">
+                {about.intro.description}
+              </Text>
             </Column>
           )}
 
           {about.work.display && (
-            <>
+            <Column fillWidth gap="l" marginBottom="xl">
               <Heading as="h2" id={about.work.title} variant="display-strong-s" marginBottom="m">
                 {about.work.title}
               </Heading>
-              <Column fillWidth gap="l" marginBottom="40">
-                {about.work.experiences.map((experience, index) => (
-                  <Column key={`${experience.company}-${experience.role}-${index}`} fillWidth>
-                    <Row fillWidth horizontal="between" vertical="end" marginBottom="4">
-                      <Text id={experience.company} variant="heading-strong-l">
-                        {experience.company}
-                      </Text>
-                      <Text variant="heading-default-xs" onBackground="neutral-weak">
-                        {experience.timeframe}
-                      </Text>
-                    </Row>
-                    <Text variant="body-default-s" onBackground="brand-weak" marginBottom="m">
-                      {experience.role}
-                    </Text>
-                    <Column as="ul" gap="16">
+              <AccordionGroup
+                items={about.work.experiences.map((experience) => ({
+                  title: `${experience.company} • ${experience.timeframe}`,
+                  content: (
+                    <Column gap="s" paddingLeft="8">
                       {experience.achievements.map(
                         (achievement: React.ReactNode, index: number) => (
                           <Text
-                            as="li"
-                            variant="body-default-m"
                             key={`${experience.company}-${index}`}
+                            variant="body-default-m"
+                            onBackground="neutral-medium"
                           >
                             {achievement}
                           </Text>
                         ),
                       )}
                     </Column>
-                    {experience.images && experience.images.length > 0 && (
-                      <Row fillWidth paddingTop="m" paddingLeft="40" gap="12" wrap>
-                        {experience.images.map((image, index) => (
-                          <Row
-                            key={index}
-                            border="neutral-medium"
-                            radius="m"
-                            minWidth={image.width}
-                            height={image.height}
-                          >
-                            <Media
-                              enlarge
-                              radius="m"
-                              sizes={image.width.toString()}
-                              alt={image.alt}
-                              src={image.src}
-                            />
-                          </Row>
-                        ))}
-                      </Row>
-                    )}
-                  </Column>
-                ))}
-              </Column>
-            </>
+                  ),
+                }))}
+              />
+            </Column>
           )}
 
           {about.studies.display && (
-            <>
+            <Column fillWidth gap="l" marginBottom="xl">
               <Heading as="h2" id={about.studies.title} variant="display-strong-s" marginBottom="m">
                 {about.studies.title}
               </Heading>
-              <Column fillWidth gap="l" marginBottom="40">
+              <Grid columns="2" gap="l" s={{ columns: "1" }}>
                 {about.studies.institutions.map((institution, index) => (
-                  <Column key={`${institution.name}-${index}`} fillWidth gap="4">
-                    <Text id={institution.name} variant="heading-strong-l">
-                      {institution.name}
-                    </Text>
-                    <Text variant="heading-default-xs" onBackground="neutral-weak">
-                      {institution.description}
-                    </Text>
-                  </Column>
+                  <Card
+                    key={`${institution.name}-${index}`}
+                    padding="l"
+                    radius="l"
+                    border="neutral-alpha-medium"
+                  >
+                    <Column gap="m">
+                      <Icon name="book" onBackground="accent-medium" />
+                      <Text id={institution.name} variant="heading-strong-s">
+                        {institution.name}
+                      </Text>
+                      <Text variant="body-default-s" onBackground="neutral-weak">
+                        {institution.description}
+                      </Text>
+                    </Column>
+                  </Card>
                 ))}
-              </Column>
-            </>
+              </Grid>
+            </Column>
           )}
 
           {about.technical.display && (
-            <>
+            <Column fillWidth gap="l" marginBottom="xl">
               <Heading
                 as="h2"
                 id={about.technical.title}
                 variant="display-strong-s"
-                marginBottom="40"
+                marginBottom="m"
               >
                 {about.technical.title}
               </Heading>
-              <Column fillWidth gap="l">
+              <Row gap="l" fillWidth wrap>
                 {about.technical.skills.map((skill, index) => (
-                  <Column key={`${skill}-${index}`} fillWidth gap="4">
-                    <Text id={skill.title} variant="heading-strong-l">
-                      {skill.title}
-                    </Text>
-                    <Text variant="body-default-m" onBackground="neutral-weak">
+                  <Column key={`${skill}-${index}`} flex={1} minWidth={280} gap="m" style={{ minWidth: 0, maxWidth: "100%" }}>
+                    <Row gap="s" vertical="center">
+                      <Icon
+                        name={index === 0 ? "document" : "rocket"}
+                        onBackground="accent-medium"
+                      />
+                      <Text id={skill.title} variant="heading-strong-s">
+                        {skill.title}
+                      </Text>
+                    </Row>
+                    <Text variant="body-default-m" onBackground="neutral-medium" wrap="balance" style={{ wordBreak: "break-word", overflowWrap: "break-word" }}>
                       {skill.description}
                     </Text>
                     {skill.tags && skill.tags.length > 0 && (
-                      <Row wrap gap="8" paddingTop="8">
+                      <Row wrap gap="s" paddingTop="s">
                         {skill.tags.map((tag, tagIndex) => (
-                          <Tag key={`${skill.title}-${tagIndex}`} size="l" prefixIcon={tag.icon}>
+                          <Tag key={`${skill.title}-${tagIndex}`} size="s" prefixIcon={tag.icon}>
                             {tag.name}
                           </Tag>
                         ))}
                       </Row>
                     )}
-                    {skill.images && skill.images.length > 0 && (
-                      <Row fillWidth paddingTop="m" gap="12" wrap>
-                        {skill.images.map((image, index) => (
-                          <Row
-                            key={index}
-                            border="neutral-medium"
-                            radius="m"
-                            minWidth={image.width}
-                            height={image.height}
-                          >
-                            <Media
-                              enlarge
-                              radius="m"
-                              sizes={image.width.toString()}
-                              alt={image.alt}
-                              src={image.src}
-                            />
-                          </Row>
-                        ))}
-                      </Row>
-                    )}
                   </Column>
                 ))}
-              </Column>
-            </>
+              </Row>
+            </Column>
           )}
+
+          {/* What's Next Section */}
+          <Column fillWidth gap="m" marginTop="xl" paddingTop="xl">
+            <Heading as="h2" variant="display-strong-s" marginBottom="m">
+              What's Next
+            </Heading>
+            <Feedback
+              variant="info"
+              description="I'm exploring ways to make AI education more accessible, build tools that solve real problems, and help businesses understand what AI can actually do for them. Always learning, always curious."
+              marginBottom="l"
+            />
+            <Row gap="s" horizontal="center" wrap>
+              <SmartLink href="mailto:neeth35@gmail.com" prefixIcon="email">
+                Get in touch
+              </SmartLink>
+              <SmartLink href="https://linkedin.com/in/neethj" prefixIcon="linkedin">
+                Connect on LinkedIn
+              </SmartLink>
+            </Row>
+          </Column>
         </Column>
       </Row>
     </Column>

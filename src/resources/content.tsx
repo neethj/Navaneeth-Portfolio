@@ -5,11 +5,12 @@ const person: Person = {
   firstName: "Navaneeth",
   lastName: "Joshi",
   name: `Navaneeth Joshi`,
-  role: "AI Educator & Full Stack Developer | Helping Businesses Scale with AI-Powered Solutions",
+  role: "AI Educator & Full Stack Developer | Exploring how technology can empower people",
   avatar: "/images/avatar.png",
   email: "neeth35@gmail.com",
-  location: "Europe/London", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English"], // optional: Leave the array empty if you don't want to display languages
+  location: "Europe/London", // IANA time zone identifier
+  locationDisplay: "London, UK", // Human-readable location for display
+  languages: ["English", "Malayalam", "Hindi"], // optional: Leave the array empty if you don't want to display languages
 };
 
 const newsletter: Newsletter = {
@@ -83,60 +84,80 @@ const about: About = {
   },
   calendar: {
     display: true,
-    link: "https://cal.com",
+    link: "https://cal.com/navaneeth-joshi",
   },
   intro: {
     display: true,
-    title: "Introduction",
+    title: "",
     description: (
       <>
-        Navaneeth is a London-based AI Educator & Full Stack Developer with a passion for helping businesses
-        scale through AI-powered solutions. His work spans full-stack development, AI integration,
-        and educational content creation to bridge the gap between technology and business needs.
+        I'm Navaneeth, a developer and educator based in London who's fascinated by how AI can make life easier for people. My journey has taken me from building chatbots in college to teaching hundreds of students, and I'm constantly learning how to bridge the gap between technology and real human needs.
       </>
     ),
   },
   work: {
-    display: true, // set to false to hide this section
-    title: "Work Experience",
+    display: true,
+    title: "My Journey",
     experiences: [
       {
-        company: "FLY",
-        timeframe: "2022 - Present",
-        role: "Senior Design Engineer",
+        company: "Finding My Path Through Teaching",
+        timeframe: "Impact Academies & Camps | January 2025 - Present",
+        role: "",
         achievements: [
-          <>
-            Redesigned the UI/UX for the FLY platform, resulting in a 20% increase in user
-            engagement and 30% faster load times.
-          </>,
-          <>
-            Spearheaded the integration of AI tools into design workflows, enabling designers to
-            iterate 50% faster.
-          </>,
+          <>Teaching AI, web development, Data Science and more bootcamps style sessions</>,
+          <>Figuring out better ways to make coding and AI feel less intimidating</>,
         ],
-        images: [
-          // optional: leave the array empty if you don't want to display images
-          {
-            src: "/images/projects/project-01/cover-01.jpg",
-            alt: "Once UI Project",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
       {
-        company: "Creativ3",
-        timeframe: "2018 - 2022",
-        role: "Lead Designer",
+        company: "Building in Public",
+        timeframe: "Build Mode AI | August 2025 - Present",
+        role: "",
         achievements: [
-          <>
-            Developed a design system that unified the brand across multiple platforms, improving
-            design consistency by 40%.
-          </>,
-          <>
-            Led a cross-functional team to launch a new product line, contributing to a 15% increase
-            in overall company revenue.
-          </>,
+          <>Experimenting with AI-powered productivity tools to solve real problems</>,
+          <>Using Cursor and Claude to build faster and iterate based on user feedback</>,
+          <>Still learning what people actually need versus what's technically cool</>,
+        ],
+        images: [],
+      },
+      {
+        company: "Consulting & Supporting Growth",
+        timeframe: "Multiverse | April 2025 - August 2025",
+        role: "",
+        achievements: [
+          <>Helped assess apprenticeship programs, learning how people develop skills in real workplace settings</>,
+          <>Gave feedback to support learners on their journey—reminded me why clear communication matters</>,
+        ],
+        images: [],
+      },
+      {
+        company: "Working with Clients",
+        timeframe: "Self-Employed | 2023 - Present",
+        role: "",
+        achievements: [
+          <>Helping businesses understand what AI can actually do for them (versus the hype)</>,
+          <>Building websites and content strategies, learning that good tech needs good storytelling</>,
+          <>Working with clients taught me that impact matters more than impressive code</>,
+        ],
+        images: [],
+      },
+      {
+        company: "Where It Started",
+        timeframe: "Code Ninjas | July 2022 - January 2025",
+        role: "",
+        achievements: [
+          <>My first teaching role—mentoring kids in game development using javascript, unity engine, c# and more</>,
+          <>Learned to break down complex ideas and discovered I genuinely enjoy helping others build things</>,
+        ],
+        images: [],
+      },
+      {
+        company: "Before It All Started",
+        timeframe: "2017 - 2021",
+        role: "",
+        achievements: [
+          <>Travelled all over india, passionate about photography/videography and created content for social media</>,
+          <>Developed NLP Chatbots, learned python and web development</>,
         ],
         images: [],
       },
@@ -147,74 +168,45 @@ const about: About = {
     title: "Studies",
     institutions: [
       {
-        name: "University of Jakarta",
-        description: <>Studied software engineering.</>,
+        name: "MSc Data Science and Analytics with Advanced Research",
+        description: (
+          <>Data Visualisation, Machine learning, Deep Learning, Data Gathering, Data Cleaning, Applied Data Science, Research Methodologies</>
+        ),
       },
       {
-        name: "Build the Future",
-        description: <>Studied online marketing and personal branding.</>,
+        name: "BTech Computer Science and Engineering",
+        description: (
+          <>Database design, System Architecture, Operating System, Web Development, Data Structure & Algorithms, Data Communication, Cryptography</>
+        ),
       },
     ],
   },
   technical: {
-    display: true, // set to false to hide this section
-    title: "Technical skills",
+    display: false,
+    title: "What I'm Working With",
     skills: [
       {
-        title: "Figma",
+        title: "Current Tools",
         description: (
-          <>Able to prototype in Figma with Once UI with unnatural speed.</>
+          <>I work with ChatGPT, Claude, Cursor, and other AI tools—understanding how they can genuinely help people. I build with React, Next.js, and Python, always trying to write cleaner code than my last project.</>
         ),
         tags: [
-          {
-            name: "Figma",
-            icon: "figma",
-          },
+          { name: "ChatGPT", icon: "openai" },
+          { name: "Claude", icon: "openai" },
+          { name: "Cursor", icon: "rocket" },
+          { name: "React", icon: "react" },
+          { name: "Next.js", icon: "nextjs" },
+          { name: "Python", icon: "python" },
         ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-02.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-          {
-            src: "/images/projects/project-01/cover-03.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
+        images: [],
       },
       {
-        title: "Next.js",
+        title: "What Drives Me",
         description: (
-          <>Building next gen apps with Next.js + Once UI + Supabase.</>
+          <>AI shouldn't feel like magic or intimidation—it should feel like a helpful tool anyone can pick up. I'm working on making that a reality, one project and one student at a time.</>
         ),
-        tags: [
-          {
-            name: "JavaScript",
-            icon: "javascript",
-          },
-          {
-            name: "Next.js",
-            icon: "nextjs",
-          },
-          {
-            name: "Supabase",
-            icon: "supabase",
-          },
-        ],
-        // optional: leave the array empty if you don't want to display images
-        images: [
-          {
-            src: "/images/projects/project-01/cover-04.jpg",
-            alt: "Project image",
-            width: 16,
-            height: 9,
-          },
-        ],
+        tags: [],
+        images: [],
       },
     ],
   },
