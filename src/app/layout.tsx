@@ -14,16 +14,25 @@ import {
   SpacingToken,
 } from "@once-ui-system/core";
 import { Footer, Header, RouteGuard, Providers } from "@/components";
-import { baseURL, effects, fonts, style, dataStyle, home } from "@/resources";
+import { baseURL, effects, fonts, style, dataStyle, home, person } from "@/resources";
 
 export async function generateMetadata() {
-  return Meta.generate({
+  const metadata = Meta.generate({
     title: home.title,
     description: home.description,
     baseURL: baseURL,
     path: home.path,
     image: home.image,
   });
+  
+  return {
+    ...metadata,
+    icons: {
+      icon: person.avatar,
+      shortcut: person.avatar,
+      apple: person.avatar,
+    },
+  };
 }
 
 export default async function RootLayout({
