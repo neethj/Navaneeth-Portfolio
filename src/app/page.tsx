@@ -10,6 +10,8 @@ import {
   Schema,
   Meta,
   Line,
+  Tag,
+  Icon,
 } from "@once-ui-system/core";
 import { home, about, person, baseURL, routes } from "@/resources";
 import { Mailchimp } from "@/components";
@@ -100,6 +102,122 @@ export default function Home() {
           </RevealFx>
         </Column>
       </Column>
+      
+      {/* GitHub-style Info Section */}
+      <RevealFx translateY="12" delay={0.5} fillWidth>
+        <Column maxWidth="m" fillWidth gap="xl" paddingY="xl" paddingX="l">
+          {/* Links Section */}
+          <Column gap="s">
+            <Text 
+              variant="label-default-s" 
+              onBackground="neutral-weak" 
+              weight="strong"
+              style={{ textTransform: "uppercase", letterSpacing: "0.5px" }}
+            >
+              Links
+            </Text>
+            <Row gap="s" wrap horizontal="center">
+              <Button
+                href="https://linkedin.com/in/neethj"
+                variant="secondary"
+                size="s"
+                prefixIcon="linkedin"
+                label="LinkedIn"
+                style={{
+                  borderRadius: "var(--static-space-6)",
+                  transition: "all 0.2s ease",
+                }}
+                className="github-link-pill"
+              />
+              <Button
+                href="https://github.com/neethj"
+                variant="secondary"
+                size="s"
+                prefixIcon="github"
+                label="GitHub"
+                style={{
+                  borderRadius: "var(--static-space-6)",
+                  transition: "all 0.2s ease",
+                }}
+                className="github-link-pill"
+              />
+              <Button
+                href="mailto:neeth35@gmail.com"
+                variant="secondary"
+                size="s"
+                prefixIcon="email"
+                label="Email"
+                style={{
+                  borderRadius: "var(--static-space-6)",
+                  transition: "all 0.2s ease",
+                }}
+                className="github-link-pill"
+              />
+              <Button
+                href="https://medium.com/@neeth35"
+                variant="secondary"
+                size="s"
+                prefixIcon="medium"
+                label="Medium"
+                style={{
+                  borderRadius: "var(--static-space-6)",
+                  transition: "all 0.2s ease",
+                }}
+                className="github-link-pill"
+              />
+            </Row>
+          </Column>
+
+          {/* Skills Section */}
+          <Column gap="s">
+            <Text 
+              variant="label-default-s" 
+              onBackground="neutral-weak" 
+              weight="strong"
+              style={{ textTransform: "uppercase", letterSpacing: "0.5px" }}
+            >
+              Skills
+            </Text>
+            <Row gap="s" wrap horizontal="center">
+              {[
+                { name: "LLMs", icon: "openai" },
+                { name: "Cursor", icon: "rocket" },
+                { name: "Python", icon: "python" },
+                { name: "JavaScript", icon: "javascript" },
+                { name: "TypeScript", icon: "typescript" },
+                { name: "React", icon: "react" },
+                { name: "Next.js", icon: "nextjs" },
+                { name: "Figma", icon: "figma" },
+                { name: "AI Prototyping", icon: "rocket" },
+                { name: "Machine Learning", icon: "rocket" },
+                { name: "Data Science", icon: "rocket" },
+                { name: "API Integration", icon: "openai" },
+                { name: "Supabase", icon: "supabase" },
+                { name: "Git", icon: "git" },
+                { name: "SEO", icon: "globe" },
+                { name: "Mentoring", icon: "person" },
+              ].map((skill) => (
+                <Tag
+                  key={skill.name}
+                  size="m"
+                  prefixIcon={skill.icon}
+                  style={{
+                    borderRadius: "var(--static-space-6)",
+                    transition: "all 0.2s ease",
+                    cursor: "default",
+                    padding: "var(--static-space-2) var(--static-space-4)",
+                    border: "none",
+                  }}
+                  className={`github-skill-tag skill-${skill.icon}`}
+                >
+                  {skill.name}
+                </Tag>
+              ))}
+            </Row>
+          </Column>
+        </Column>
+      </RevealFx>
+
       <RevealFx translateY="16" delay={0.6}>
         <Projects range={[1, 1]} />
       </RevealFx>

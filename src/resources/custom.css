@@ -52,3 +52,88 @@
   --scheme-neutral-600-50: rgba(137,152,159,0.5);
   /*
 }*/
+
+/* GitHub-style Info Section Hover Effects */
+.github-link-pill:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.github-skill-tag {
+  position: relative;
+  border: none !important;
+  outline: none !important;
+}
+
+.github-skill-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Make icons larger and colorful */
+.github-skill-tag svg {
+  width: 22px !important;
+  height: 22px !important;
+  min-width: 22px !important;
+  min-height: 22px !important;
+  margin-right: var(--static-space-2);
+  flex-shrink: 0;
+}
+
+/* Colorful icons for specific technologies */
+.skill-python svg {
+  color: #3776ab !important;
+}
+
+.skill-javascript svg {
+  color: #f7df1e !important;
+}
+
+.skill-typescript svg {
+  color: #3178c6 !important;
+}
+
+.skill-react svg {
+  color: #61dafb !important;
+}
+
+.skill-nextjs svg {
+  color: #ffffff !important;
+}
+
+/* Dark mode support for Next.js */
+[data-theme="dark"] .skill-nextjs svg {
+  color: #ffffff !important;
+}
+
+[data-theme="light"] .skill-nextjs svg {
+  color: #000000 !important;
+}
+
+.skill-figma svg {
+  color: #f24e1e !important;
+}
+
+.skill-supabase svg {
+  color: #3ecf8e !important;
+}
+
+.skill-git svg {
+  color: #f05032 !important;
+}
+
+.skill-openai svg {
+  color: #10a37f !important;
+}
+
+.skill-rocket svg {
+  color: var(--scheme-brand-600) !important;
+}
+
+.skill-globe svg {
+  color: var(--scheme-accent-600) !important;
+}
+
+.skill-person svg {
+  color: var(--scheme-brand-600) !important;
+}

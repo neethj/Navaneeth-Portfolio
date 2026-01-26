@@ -27,6 +27,12 @@ import {
   SiNextdotjs,
   SiFigma,
   SiSupabase,
+  SiPython,
+  SiTypescript,
+  SiReact,
+  SiOpenai,
+  SiGit,
+  SiMedium,
 } from "react-icons/si";
 
 import { FaDiscord, FaGithub, FaLinkedin, FaX, FaThreads, FaInstagram, FaXTwitter, FaFacebook, FaPinterest, FaWhatsapp, FaReddit, FaTelegram, } from "react-icons/fa6";
@@ -58,6 +64,12 @@ export const iconLibrary: Record<string, IconType> = {
   nextjs: SiNextdotjs,
   supabase: SiSupabase,
   figma: SiFigma,
+  python: SiPython,
+  typescript: SiTypescript,
+  react: SiReact,
+  openai: SiOpenai,
+  git: SiGit,
+  medium: SiMedium,
   facebook: FaFacebook,
   pinterest: FaPinterest,
   whatsapp: FaWhatsapp,
