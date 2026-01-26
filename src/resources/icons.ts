@@ -33,6 +33,7 @@ import {
   SiOpenai,
   SiGit,
   SiMedium,
+  SiWordpress,
 } from "react-icons/si";
 
 import { FaDiscord, FaGithub, FaLinkedin, FaX, FaThreads, FaInstagram, FaXTwitter, FaFacebook, FaPinterest, FaWhatsapp, FaReddit, FaTelegram, } from "react-icons/fa6";
@@ -70,6 +71,7 @@ export const iconLibrary: Record<string, IconType> = {
   openai: SiOpenai,
   git: SiGit,
   medium: SiMedium,
+  wordpress: SiWordpress,
   facebook: FaFacebook,
   pinterest: FaPinterest,
   whatsapp: FaWhatsapp,

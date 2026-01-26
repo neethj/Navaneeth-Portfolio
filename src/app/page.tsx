@@ -112,7 +112,7 @@ export default function Home() {
               variant="label-default-s" 
               onBackground="neutral-weak" 
               weight="strong"
-              style={{ textTransform: "uppercase", letterSpacing: "0.5px" }}
+              style={{ textTransform: "uppercase", letterSpacing: "0.5px", textAlign: "center" }}
             >
               Links
             </Text>
@@ -174,7 +174,7 @@ export default function Home() {
               variant="label-default-s" 
               onBackground="neutral-weak" 
               weight="strong"
-              style={{ textTransform: "uppercase", letterSpacing: "0.5px" }}
+              style={{ textTransform: "uppercase", letterSpacing: "0.5px", textAlign: "center" }}
             >
               Skills
             </Text>
@@ -194,6 +194,8 @@ export default function Home() {
                 { name: "API Integration", icon: "openai" },
                 { name: "Supabase", icon: "supabase" },
                 { name: "Git", icon: "git" },
+                { name: "WordPress", icon: "wordpress" },
+                { name: "LMS", icon: "rocket" },
                 { name: "SEO", icon: "globe" },
                 { name: "Mentoring", icon: "person" },
               ].map((skill) => (
