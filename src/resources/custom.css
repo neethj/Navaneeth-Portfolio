@@ -142,9 +142,21 @@
   color: var(--scheme-brand-600) !important;
 }
 
-/* Project Cards Hover Effects */
+/* Project Cards */
 .project-card {
   cursor: default;
+}
+
+.project-card__description {
+  overflow-wrap: break-word;
+  word-break: break-word;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .project-card__description {
+    hyphens: auto;
+  }
 }
 
 .project-card:hover {

@@ -256,11 +256,11 @@ export default function Home() {
               {
                 title: "EXEA",
                 description:
-                  "Project management app with a modern landing page. Designed in Figma and built with React for a clean, responsive experience.",
+                  "Project management app with a modern landing page. Built with React and Tailwind, designed in Figma.",
                 tech: ["React", "Tailwind CSS", "Figma"],
                 impact: "Project management & landing page",
                 github: null,
-                live: "https://eaglestrike-hr8t8lyhr-neeth35-6341s-projects.vercel.app/",
+                live: "https://eaglestrike-git-public-launch-neeth35-6341s-projects.vercel.app/?_vercel_share=t41TxPiVf3Wi6VwCf889znOgRTFc7kge",
                 image: "/images/projects/exea/land.png",
               },
               {
@@ -369,9 +369,11 @@ export default function Home() {
                   </Heading>
 
                   {/* Description */}
-                  <Text variant="body-default-m" onBackground="neutral-weak" wrap="balance">
-                    {project.description}
-                  </Text>
+                  <div className="project-card__description">
+                    <Text variant="body-default-m" onBackground="neutral-weak" wrap="balance">
+                      {project.description}
+                    </Text>
+                  </div>
 
                   {/* Tech Stack */}
                   <Row gap="s" wrap>
