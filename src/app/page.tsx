@@ -266,8 +266,8 @@ export default function Home() {
               {
                 title: "Build Mode AI",
                 description:
-                  "AI-powered project management app to simplify task management for entrepreneurs. Built with modern stack and OpenAI API integration.",
-                tech: ["React", "Next.js", "TypeScript", "OpenAI API", "Supabase", "Clerk Auth"],
+                  "AI-powered project management app with CRUD operations to simplify task management for entrepreneurs. Built with modern stack and OpenAI API integration.",
+                tech: ["React", "Next.js", "TypeScript", "OpenAI API", "PostgreSQL", "Clerk Auth"],
                 impact: "10+ user tests, Personalised plan to execute your idea on solving a problem",
                 github: "https://github.com/neethj/project-management-app",
                 live: "https://eaglestrike-phi.vercel.app/",
