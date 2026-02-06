@@ -254,6 +254,16 @@ export default function Home() {
           <Grid columns="2" gap="l" s={{ columns: "1" }}>
             {[
               {
+                title: "EXEA",
+                description:
+                  "Project management app with a modern landing page. Designed in Figma and built with React for a clean, responsive experience.",
+                tech: ["React", "Figma"],
+                impact: "Project management & landing page",
+                github: null,
+                live: "https://eaglestrike-hr8t8lyhr-neeth35-6341s-projects.vercel.app/",
+                image: "/images/projects/exea/land.png",
+              },
+              {
                 title: "Build Mode AI",
                 description:
                   "AI-powered project management app to simplify task management for entrepreneurs. Built with modern stack and OpenAI API integration.",
